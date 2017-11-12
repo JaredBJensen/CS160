@@ -10,8 +10,7 @@
     void yyerror(const char *);
 %}
 
-DIGIT 				[0-9]			
-CHAR 				[a-zA-Z]
+DIGIT 				[0-9]	
 
 %x COMMENT
 
@@ -54,7 +53,7 @@ do					{ return T_DO; }
 [0]|[1-9]{DIGIT}*				{ yylval.base_int = atoi(yytext);
 										  return T_NUMBER; }
 										  
-{CHAR}[{CHAR}{DIGIT}]*	{ yylval.base_char_ptr = strdup(yytext);
+[a-zA-Z][a-zA-Z0-9]*			{ yylval.base_char_ptr = strdup(yytext);
 										  return T_ID; }
 
 "/*" 									{ BEGIN(COMMENT); }
